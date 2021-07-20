@@ -8,7 +8,7 @@ If your field supports 'unlimited' values then you are offered the option of cus
 Requirements
 ------------
 
-This module requires Drupal core 7.8 or higher.
+This module requires Drupal core 8 or higher.
 
 Usage
 -----

@@ -3,7 +3,7 @@
 namespace Drupal\custom_add_another\Tests;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
-use Drupal\file\Tests\FileFieldTestBase;
+use Drupal\Tests\file\Functional\FileFieldTestBase;
 
 /**
  * Test case for 'Remove' button label alter.

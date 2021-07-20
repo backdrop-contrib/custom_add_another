@@ -3,7 +3,7 @@
 namespace Drupal\custom_add_another\Tests;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
-use Drupal\field\Tests\FieldTestBase;
+use Drupal\Tests\field\Functional\FieldTestBase;
 
 /**
  * Test case for 'Add another item' button label alter.
