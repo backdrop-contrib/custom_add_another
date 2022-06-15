@@ -8,22 +8,7 @@
 use Drupal\Core\Render\Element;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\field\FieldConfigInterface;
-
-/**
- * Implements hook_entity_bundle_field_info_alter().
- */
-function custom_add_another_entity_bundle_field_info_alter(&$fields, EntityTypeInterface $entity_type, $bundle) {
-  foreach ($fields as $field_type => &$field) {
-    if ($field instanceof FieldConfigInterface && empty($field->getThirdPartySettings('custom_add_another'))) {
-      $field
-        ->setThirdPartySetting('custom_add_another', 'custom_add_another', '')
-        ->setThirdPartySetting('custom_add_another', 'custom_remove', '')
-        ->save();
-    }
-  }
-}
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -43,7 +28,7 @@ function custom_add_another_form_field_storage_config_edit_form_alter(&$form, Fo
       '#type' => 'textfield',
       '#title' => t('Custom add another item button'),
       '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Add another item'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
-      '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_add_another'),
+      '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_add_another', ''),
 
       // Hidden when the 'Number of values' is not unlimited.
       '#states' => [
@@ -61,7 +46,7 @@ function custom_add_another_form_field_storage_config_edit_form_alter(&$form, Fo
       '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Remove'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
       // Add a hint for the empty value if hint module is around.
       '#hint' => t('Remove this item'),
-      '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_remove'),
+      '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_remove', ''),
 
       // Hidden when the 'Number of values' is not unlimited.
       '#states' => [
@@ -84,10 +69,25 @@ function custom_add_another_third_party_settings_submit($form, FormStateInterfac
   /** @var \Drupal\field\FieldConfigInterface $field */
   $field = $form_state->getStorage()['field_config'];
 
-  $field
-    ->setThirdPartySetting('custom_add_another', 'custom_add_another', $form_state->getValue('custom_add_another'))
-    ->setThirdPartySetting('custom_add_another', 'custom_remove', $form_state->getValue('custom_remove'))
-    ->save();
+  if (!empty($form_state->getValue('custom_add_another'))) {
+    $field
+      ->setThirdPartySetting('custom_add_another', 'custom_add_another', $form_state->getValue('custom_add_another'));
+  }
+  else {
+    $field
+      ->unsetThirdPartySetting('custom_add_another', 'custom_add_another');
+  }
+
+  if (!empty($form_state->getValue('custom_remove'))) {
+    $field
+      ->setThirdPartySetting('custom_add_another', 'custom_remove', $form_state->getValue('custom_remove'));
+  }
+  else {
+    $field
+      ->unsetThirdPartySetting('custom_add_another', 'custom_remove');
+  }
+
+  $field->save();
 }
 
 /**
