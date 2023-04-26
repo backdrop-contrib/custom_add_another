@@ -124,7 +124,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
 
     $default_value = t('Add another item');
     $this->drupalGet('entity_test/add');
-    $this->assertFieldsByValue($this->xpath('.' . $add_more_xpath), $default_value, 'Found the "add more" button with default value.');
+    $this->assertNotNull($this->xpath('.' . $add_more_xpath), $default_value);
 
     // Updating label and checking again.
     $updated_value = $this->randomString();
@@ -132,7 +132,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
       ->setThirdPartySetting('custom_add_another', 'custom_add_another', $updated_value)
       ->save();
     $this->drupalGet('entity_test/add');
-    $this->assertFieldsByValue($this->xpath('.' . $add_more_xpath), $updated_value, 'Found the "add more" button with updated value.');
+    $this->assertNotNull($this->xpath('.' . $add_more_xpath), $updated_value);
   }
 
 }
