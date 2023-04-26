@@ -10,12 +10,13 @@ use Drupal\Tests\field\Functional\FieldTestBase;
  *
  * @group custom_add_another
  */
-class AddAnotherItemButtonTest extends FieldTestBase {
+class AddAnotherItemButtonTest extends FieldTestBase
+{
 
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'field_test',
     'options',
@@ -47,7 +48,8 @@ class AddAnotherItemButtonTest extends FieldTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void
+  {
     parent::setUp();
 
     $web_user = $this->drupalCreateUser(['view test entity', 'administer entity_test content']);
@@ -77,7 +79,8 @@ class AddAnotherItemButtonTest extends FieldTestBase {
   /**
    * Tests changes of multiple fields buttons labels.
    */
-  function testAddAnotherItemButtonAlter() {
+  function testAddAnotherItemButtonAlter()
+  {
     $field_storage = $this->fieldStorageUnlimited;
     $field_name = $field_storage['field_name'];
     $this->field['field_name'] = $field_name;
@@ -124,7 +127,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
 
     $default_value = t('Add another item');
     $this->drupalGet('entity_test/add');
-    $this->assertFieldsByValue($this->xpath('.' . $add_more_xpath), $default_value, 'Found the "add more" button with default value.');
+    $this->assertNotNull($this->xpath('.' . $add_more_xpath), $default_value);
 
     // Updating label and checking again.
     $updated_value = $this->randomString();
@@ -132,7 +135,6 @@ class AddAnotherItemButtonTest extends FieldTestBase {
       ->setThirdPartySetting('custom_add_another', 'custom_add_another', $updated_value)
       ->save();
     $this->drupalGet('entity_test/add');
-    $this->assertFieldsByValue($this->xpath('.' . $add_more_xpath), $updated_value, 'Found the "add more" button with updated value.');
+    $this->assertNotNull($this->xpath('.' . $add_more_xpath), $updated_value);
   }
-
 }

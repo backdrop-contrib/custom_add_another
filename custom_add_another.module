@@ -9,6 +9,7 @@ use Drupal\Core\Render\Element;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\FieldConfigInterface;
+use Drupal\Core\Entity\EntityFormInterface;
 
 /**
  * Implements hook_form_FORM_ID_alter().
@@ -20,45 +21,48 @@ function custom_add_another_form_field_storage_config_edit_form_alter(&$form, Fo
   /** @var \Drupal\field\FieldConfigInterface $field */
   $field = $form_state->getStorage()['field_config'];
 
-  /** @var \Drupal\field\FieldStorageConfigInterface $field_storage */
-  $field_storage = $form_state->getFormObject()->getEntity();
+  $form_object = $form_state->getFormObject();
+  if ($form_object instanceof EntityFormInterface) {
+    /** @var \Drupal\field\FieldStorageConfigInterface $field_storage */
+    $field_storage = $form_object->getEntity();
 
-  if (!$field_storage->isLocked()) {
-    $form['custom_add_another'] = [
-      '#type' => 'textfield',
-      '#title' => t('Custom add another item button'),
-      '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Add another item'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
-      '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_add_another', ''),
+    if (!$field_storage->isLocked()) {
+      $form['custom_add_another'] = [
+        '#type' => 'textfield',
+        '#title' => t('Custom add another item button'),
+        '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Add another item'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
+        '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_add_another', ''),
 
-      // Hidden when the 'Number of values' is not unlimited.
-      '#states' => [
-        'visible' => [
-          ':input[name="cardinality"]' => [
-            'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+        // Hidden when the 'Number of values' is not unlimited.
+        '#states' => [
+          'visible' => [
+            ':input[name="cardinality"]' => [
+              'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+            ],
           ],
         ],
-      ],
-    ];
+      ];
 
-    $form['custom_remove'] = [
-      '#type' => 'textfield',
-      '#title' => t('Custom remove button'),
-      '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Remove'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
-      // Add a hint for the empty value if hint module is around.
-      '#hint' => t('Remove this item'),
-      '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_remove', ''),
+      $form['custom_remove'] = [
+        '#type' => 'textfield',
+        '#title' => t('Custom remove button'),
+        '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Remove'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
+        // Add a hint for the empty value if hint module is around.
+        '#hint' => t('Remove this item'),
+        '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_remove', ''),
 
-      // Hidden when the 'Number of values' is not unlimited.
-      '#states' => [
-        'visible' => [
-          ':input[name="cardinality"]' => [
-            'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+        // Hidden when the 'Number of values' is not unlimited.
+        '#states' => [
+          'visible' => [
+            ':input[name="cardinality"]' => [
+              'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+            ],
           ],
         ],
-      ],
-    ];
+      ];
 
-    array_unshift($form['actions']['submit']['#submit'], 'custom_add_another_third_party_settings_submit');
+      array_unshift($form['actions']['submit']['#submit'], 'custom_add_another_third_party_settings_submit');
+    }
   }
 }
 
