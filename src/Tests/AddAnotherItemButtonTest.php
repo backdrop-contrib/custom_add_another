@@ -125,11 +125,11 @@ class AddAnotherItemButtonTest extends FieldTestBase {
 
     // Checking field label.
     $button_name = $field_name . '_add_more';
-    $add_more_xpath = '//input[@name="' . $button_name . '"]';
 
     $default_value = t('Add another item');
     $this->drupalGet('entity_test/add');
-    $this->assertSession()->buttonExists($default_value);
+    $button = $this->assertSession()->buttonExists($button_name);
+    $this->assertSame($default_value, $button->getValue());
 
     // Updating label and checking again.
     $updated_value = $this->randomString();
@@ -137,7 +137,8 @@ class AddAnotherItemButtonTest extends FieldTestBase {
       ->setThirdPartySetting('custom_add_another', 'custom_add_another', $updated_value)
       ->save();
     $this->drupalGet('entity_test/add');
-    $this->assertSession()->buttonExists($updated_value);
+    $button = $this->assertSession()->buttonExists($button_name);
+    $this->assertSame($updated_value, $button->getValue());
   }
 
 }

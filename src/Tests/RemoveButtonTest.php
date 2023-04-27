@@ -68,7 +68,9 @@ class RemoveButtonTest extends FileFieldTestBase {
     ];
     $this->submitForm($edit, t('Upload'));
 
-    $this->assertSession()->buttonExists(t('Remove'));
+    $button_name = $field_name . '_0_remove_button';
+    $button = $this->assertSession()->buttonExists($button_name);
+    $this->assertSame(t('Remove'), $button->getValue());
 
     // Updating field settings and checking labels again.
     $updated_add_more_value = $this->randomString();
@@ -85,7 +87,8 @@ class RemoveButtonTest extends FileFieldTestBase {
     $edit = ['files[' . $field_name . '_0][]' => $this->fileSystem->realpath($test_file->getFileUri())];
     $this->submitForm($edit, $updated_add_more_value);
 
-    $this->assertSession()->buttonExists($updated_remove_value);
+    $button = $this->assertSession()->buttonExists($button_name);
+    $this->assertSame($updated_remove_value, $button->getValue());
   }
 
 }
