@@ -63,9 +63,7 @@ class RemoveButtonTest extends FileFieldTestBase {
     ];
     $this->submitForm($edit, t('Upload'));
 
-    $button_name = $field_name . '_0_remove_button';
-    $remove_button_xpath = '//input[@name="' . $button_name . '"]';
-    $this->assertFieldsByValue($this->xpath('.' . $remove_button_xpath), t('Remove'), 'Found the "Remove" button with default value.');
+    $this->assertSession()->buttonExists(t('Remove'));
 
     // Updating field settings and checking labels again.
     $updated_add_more_value = $this->randomString();
@@ -82,7 +80,7 @@ class RemoveButtonTest extends FileFieldTestBase {
     $edit = ['files[' . $field_name . '_0][]' => $this->fileSystem->realpath($test_file->getFileUri())];
     $this->submitForm($edit, $updated_add_more_value);
 
-    $this->assertFieldsByValue($this->xpath('.' . $remove_button_xpath), $updated_remove_value, 'Found the "Remove" button with updated value.');
+    $this->assertSession()->buttonExists($updated_remove_value);
   }
 
 }
