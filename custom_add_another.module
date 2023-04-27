@@ -91,9 +91,10 @@ function custom_add_another_third_party_settings_submit($form, FormStateInterfac
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Implements hook_field_widget_complete_form_alter().
  */
-function custom_add_another_field_widget_form_alter(&$element, FormStateInterface $form_state, $context) {
+function custom_add_another_field_widget_complete_form_alter(&$field_widget_complete_form, FormStateInterface $form_state, $context) {
+  $element = &$field_widget_complete_form['widget'];
   $field = $context['items']->getFieldDefinition();
 
   if ($field instanceof FieldConfigInterface) {
@@ -125,22 +126,20 @@ function custom_add_another_field_widget_form_alter(&$element, FormStateInterfac
  * Implements hook_preprocess_field_multiple_value_form().
  *
  * We look for a value that was placed there earlier by
- * custom_add_another_field_widget_form_alter() and change the add_more button
- * to use that.
+ * custom_add_another_field_widget_complete_form_alter() and change the
+ * add_more button to use that.
  */
 function custom_add_another_preprocess_field_multiple_value_form(&$variables) {
-  foreach (Element::children($variables['element']) as $child) {
-    $child_element = &$variables['element'][$child];
-    if (isset($child_element['#custom_add_another_value']) || isset($child_element['#custom_remove'])) {
-      if (isset($child_element['#custom_add_another_value']) && isset($variables['element']['add_more']['#value']) && $variables['element']['add_more']['#value'] != t($child_element['#custom_add_another_value'])) {
-        $variables['element']['add_more']['#value'] = t($child_element['#custom_add_another_value']);
-      }
-      if (isset($child_element['#custom_add_another_value']) && isset($variables['button']['#value']) && $variables['button']['#value'] != t($child_element['#custom_add_another_value'])) {
-        $variables['button']['#value'] = t($child_element['#custom_add_another_value']);
-      }
-      if (isset($child_element['#custom_remove']) && isset($child_element['remove_button']['#value'])) {
-        $child_element['remove_button']['#value'] = t($child_element['#custom_remove']);
-      }
+  $child_element = $variables['element'];
+  if (isset($child_element['#custom_add_another_value']) || isset($child_element['#custom_remove'])) {
+    if (isset($child_element['#custom_add_another_value']) && isset($variables['element']['add_more']['#value']) && $variables['element']['add_more']['#value'] != t($child_element['#custom_add_another_value'])) {
+      $variables['element']['add_more']['#value'] = t($child_element['#custom_add_another_value']);
+    }
+    if (isset($child_element['#custom_add_another_value']) && isset($variables['button']['#value']) && $variables['button']['#value'] != t($child_element['#custom_add_another_value'])) {
+      $variables['button']['#value'] = t($child_element['#custom_add_another_value']);
+    }
+    if (isset($child_element['#custom_remove']) && isset($child_element['remove_button']['#value'])) {
+      $child_element['remove_button']['#value'] = t($child_element['#custom_remove']);
     }
   }
 }
