@@ -15,7 +15,7 @@ class RemoveButtonTest extends FileFieldTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'file',
     'file_module_test',
@@ -40,7 +40,7 @@ class RemoveButtonTest extends FileFieldTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $this->entityTypeManager = $this->container->get('entity_type.manager');
@@ -61,7 +61,7 @@ class RemoveButtonTest extends FileFieldTestBase {
     $edit = [
       'files[' . $field_name . '_0][]' => $this->fileSystem->realpath($test_file->getFileUri()),
     ];
-    $this->drupalPostForm(NULL, $edit, t('Upload'));
+    $this->submitForm($edit, t('Upload'));
 
     $button_name = $field_name . '_0_remove_button';
     $remove_button_xpath = '//input[@name="' . $button_name . '"]';
@@ -80,7 +80,7 @@ class RemoveButtonTest extends FileFieldTestBase {
 
     $this->drupalGet("node/add/$type_name");
     $edit = ['files[' . $field_name . '_0][]' => $this->fileSystem->realpath($test_file->getFileUri())];
-    $this->drupalPostForm(NULL, $edit, $updated_add_more_value);
+    $this->submitForm($edit, $updated_add_more_value);
 
     $this->assertFieldsByValue($this->xpath('.' . $remove_button_xpath), $updated_remove_value, 'Found the "Remove" button with updated value.');
   }

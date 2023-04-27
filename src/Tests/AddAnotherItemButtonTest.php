@@ -15,7 +15,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
   /**
    * {@inheritdoc}
    */
-  public static $modules = [
+  protected static $modules = [
     'node',
     'field_test',
     'options',
@@ -47,7 +47,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
   /**
    * {@inheritdoc}
    */
-  protected function setUp() {
+  protected function setUp(): void {
     parent::setUp();
 
     $web_user = $this->drupalCreateUser(['view test entity', 'administer entity_test content']);
