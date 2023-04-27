@@ -70,7 +70,7 @@ class RemoveButtonTest extends FileFieldTestBase {
 
     $button_name = $field_name . '_0_remove_button';
     $button = $this->assertSession()->buttonExists($button_name);
-    $this->assertSame(t('Remove'), $button->getValue());
+    $this->assertSame('Remove', $button->getValue());
 
     // Updating field settings and checking labels again.
     $updated_add_more_value = $this->randomString();

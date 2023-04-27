@@ -126,7 +126,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
     // Checking field label.
     $button_name = $field_name . '_add_more';
 
-    $default_value = t('Add another item');
+    $default_value = 'Add another item';
     $this->drupalGet('entity_test/add');
     $button = $this->assertSession()->buttonExists($button_name);
     $this->assertSame($default_value, $button->getValue());
