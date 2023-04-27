@@ -167,7 +167,6 @@ function custom_add_another_preprocess_file_widget_multiple(&$variables) {
   $element = $variables['element'];
   if (isset($element['#custom_add_another_value'])) {
     foreach (Element::children($element) as $child_key) {
-      //      $child_element = $element[$child_key];
       $variables['element'][$child_key]['#title'] = t($element['#custom_add_another_value']);
     }
   }
@@ -178,9 +177,6 @@ function custom_add_another_preprocess_file_widget_multiple(&$variables) {
  */
 function custom_add_another_process_file_buttons_labels($element, FormStateInterface $form_state, $form) {
   if (isset($element['#custom_add_another_value']) || isset($element['#custom_remove'])) {
-    if (isset($element['#custom_add_another_value']) && isset($element['upload_button']['#value']) && $element['upload_button']['#value'] != t($element['#custom_add_another_value'])) {
-      $element['upload_button']['#value'] = t($element['#custom_add_another_value']);
-    }
     if (isset($element['#custom_remove']) && isset($element['remove_button']['#value'])) {
       $element['remove_button']['#value'] = t($element['#custom_remove']);
     }
