@@ -118,6 +118,22 @@ function custom_add_another_field_widget_complete_form_alter(&$field_widget_comp
       if (!empty($element['#type']) && $element['#type'] == 'managed_file') {
         $element['#process'][] = 'custom_add_another_process_file_buttons_labels';
       }
+
+      // Additionally process a core multiple file field.
+      if (!empty($element['#theme']) && $element['#theme'] == 'file_widget_multiple') {
+        foreach (Element::children($element) as $child_key) {
+          $child_element = &$element[$child_key];
+          if ($child_element['#type'] == 'managed_file') {
+            if (isset($add_another_text)) {
+              $child_element['#custom_add_another_value'] = $add_another_text;
+            }
+            if (isset($remove_text)) {
+              $child_element['#custom_remove'] = $remove_text;
+            }
+            $child_element['#process'][] = 'custom_add_another_process_file_buttons_labels';
+          }
+        }
+      }
     }
   }
 }
@@ -140,6 +156,19 @@ function custom_add_another_preprocess_field_multiple_value_form(&$variables) {
     }
     if (isset($child_element['#custom_remove']) && isset($child_element['remove_button']['#value'])) {
       $child_element['remove_button']['#value'] = t($child_element['#custom_remove']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_file_widget_multiple().
+ */
+function custom_add_another_preprocess_file_widget_multiple(&$variables) {
+  $element = $variables['element'];
+  if (isset($element['#custom_add_another_value'])) {
+    foreach (Element::children($element) as $child_key) {
+      //      $child_element = $element[$child_key];
+      $variables['element'][$child_key]['#title'] = t($element['#custom_add_another_value']);
     }
   }
 }
