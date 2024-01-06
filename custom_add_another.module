@@ -34,7 +34,7 @@ function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateI
       '#states' => [
         'visible' => [
           ':input[name="field_storage[subform][cardinality]"]' => [
-            'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+            'value' => (string) FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
           ],
         ],
       ],
@@ -52,7 +52,7 @@ function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateI
       '#states' => [
         'visible' => [
           ':input[name="field_storage[subform][cardinality]"]' => [
-            'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
+            'value' => (string) FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
           ],
         ],
       ],
