@@ -3,6 +3,7 @@
 namespace Drupal\custom_add_another\Tests;
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Tests\file\Functional\FileFieldTestBase;
 
 /**
@@ -11,6 +12,7 @@ use Drupal\Tests\file\Functional\FileFieldTestBase;
  * @group custom_add_another
  */
 class RemoveButtonTest extends FileFieldTestBase {
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
@@ -55,7 +57,7 @@ class RemoveButtonTest extends FileFieldTestBase {
   /**
    * Tests changes of multiple fields buttons labels.
    */
-  function testRemoveButtonLabelAlter() {
+  public function testRemoveButtonLabelAlter() {
     $type_name = 'article';
     $field_name = 'test_file_field';
     $test_file = $this->getTestFile('text');
@@ -66,7 +68,7 @@ class RemoveButtonTest extends FileFieldTestBase {
     $edit = [
       'files[' . $field_name . '_0][]' => $this->fileSystem->realpath($test_file->getFileUri()),
     ];
-    $this->submitForm($edit, t('Upload'));
+    $this->submitForm($edit, $this->t('Upload'));
 
     $button_name = $field_name . '_0_remove_button';
     $button = $this->assertSession()->buttonExists($button_name);

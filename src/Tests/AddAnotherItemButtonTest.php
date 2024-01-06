@@ -82,12 +82,12 @@ class AddAnotherItemButtonTest extends FieldTestBase {
   /**
    * Tests changes of multiple fields buttons labels.
    */
-  function testAddAnotherItemButtonAlter() {
+  public function testAddAnotherItemButtonAlter() {
     $field_storage = $this->fieldStorageUnlimited;
     $field_name = $field_storage['field_name'];
     $this->field['field_name'] = $field_name;
 
-    // Creating field with unlimited cardinality
+    // Creating field with unlimited cardinality.
     $this
       ->entityTypeManager
       ->getStorage('field_storage_config')
@@ -132,7 +132,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
     $this->assertSame($default_value, $button->getValue());
 
     // Updating label and checking again.
-    $updated_value = $this->randomString();
+    $updated_value = $this->randomMachineName();
     $field_config_entity
       ->setThirdPartySetting('custom_add_another', 'custom_add_another', $updated_value)
       ->save();
