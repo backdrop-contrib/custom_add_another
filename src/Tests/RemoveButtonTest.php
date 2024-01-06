@@ -75,8 +75,8 @@ class RemoveButtonTest extends FileFieldTestBase {
     $this->assertSame('Remove', $button->getValue());
 
     // Updating field settings and checking labels again.
-    $updated_add_more_value = $this->randomMachineName();
-    $updated_remove_value = $this->randomMachineName();
+    $updated_add_more_value = $this->randomString();
+    $updated_remove_value = $this->randomString();
     $this
       ->entityTypeManager
       ->getStorage('field_config')

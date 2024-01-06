@@ -132,7 +132,7 @@ class AddAnotherItemButtonTest extends FieldTestBase {
     $this->assertSame($default_value, $button->getValue());
 
     // Updating label and checking again.
-    $updated_value = $this->randomMachineName();
+    $updated_value = $this->randomString();
     $field_config_entity
       ->setThirdPartySetting('custom_add_another', 'custom_add_another', $updated_value)
       ->save();

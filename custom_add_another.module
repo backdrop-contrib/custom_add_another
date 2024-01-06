@@ -146,19 +146,14 @@ function custom_add_another_field_widget_complete_form_alter(&$field_widget_comp
 function custom_add_another_preprocess_field_multiple_value_form(&$variables) {
   $child_element = $variables['element'];
   if (isset($child_element['#custom_add_another_value']) || isset($child_element['#custom_remove'])) {
-    // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
-    if (isset($child_element['#custom_add_another_value']) && isset($variables['element']['add_more']['#value']) && $variables['element']['add_more']['#value'] != t($child_element['#custom_add_another_value'])) {
-      // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
-      $variables['element']['add_more']['#value'] = t($child_element['#custom_add_another_value']);
+    if (isset($child_element['#custom_add_another_value']) && isset($variables['element']['add_more']['#value']) && $variables['element']['add_more']['#value'] != $child_element['#custom_add_another_value']) {
+      $variables['element']['add_more']['#value'] = $child_element['#custom_add_another_value'];
     }
-    // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
-    if (isset($child_element['#custom_add_another_value']) && isset($variables['button']['#value']) && $variables['button']['#value'] != t($child_element['#custom_add_another_value'])) {
-      // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
-      $variables['button']['#value'] = t($child_element['#custom_add_another_value']);
+    if (isset($child_element['#custom_add_another_value']) && isset($variables['button']['#value']) && $variables['button']['#value'] != $child_element['#custom_add_another_value']) {
+      $variables['button']['#value'] = $child_element['#custom_add_another_value'];
     }
     if (isset($child_element['#custom_remove']) && isset($child_element['remove_button']['#value'])) {
-      // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
-      $child_element['remove_button']['#value'] = t($child_element['#custom_remove']);
+      $child_element['remove_button']['#value'] = $child_element['#custom_remove'];
     }
   }
 }
