@@ -16,12 +16,12 @@ use Drupal\field\FieldConfigInterface;
  * Add a textbox for the 'custom_add_another' instance settings on the 'Edit
  * field instance' form.
  */
-function custom_add_another_form_field_storage_config_edit_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateInterface $form_state) {
   /** @var \Drupal\field\FieldConfigInterface $field */
-  $field = $form_state->getStorage()['field_config'];
+  $field = $form_state->get('field_config');
 
   /** @var \Drupal\field\FieldStorageConfigInterface $field_storage */
-  $field_storage = $form_state->getFormObject()->getEntity();
+  $field_storage = $form_state->getFormObject()->getEntity()->getFieldStorageDefinition();
 
   if (!$field_storage->isLocked()) {
     $form['custom_add_another'] = [
@@ -33,7 +33,7 @@ function custom_add_another_form_field_storage_config_edit_form_alter(&$form, Fo
       // Hidden when the 'Number of values' is not unlimited.
       '#states' => [
         'visible' => [
-          ':input[name="cardinality"]' => [
+          ':input[name="field_storage[subform][cardinality]"]' => [
             'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
           ],
         ],
@@ -51,7 +51,7 @@ function custom_add_another_form_field_storage_config_edit_form_alter(&$form, Fo
       // Hidden when the 'Number of values' is not unlimited.
       '#states' => [
         'visible' => [
-          ':input[name="cardinality"]' => [
+          ':input[name="field_storage[subform][cardinality]"]' => [
             'value' => FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED,
           ],
         ],
@@ -67,7 +67,7 @@ function custom_add_another_form_field_storage_config_edit_form_alter(&$form, Fo
  */
 function custom_add_another_third_party_settings_submit($form, FormStateInterface $form_state) {
   /** @var \Drupal\field\FieldConfigInterface $field */
-  $field = $form_state->getStorage()['field_config'];
+  $field = $form_state->getFormObject()->getEntity();
 
   if (!empty($form_state->getValue('custom_add_another'))) {
     $field
@@ -86,8 +86,6 @@ function custom_add_another_third_party_settings_submit($form, FormStateInterfac
     $field
       ->unsetThirdPartySetting('custom_add_another', 'custom_remove');
   }
-
-  $field->save();
 }
 
 /**
