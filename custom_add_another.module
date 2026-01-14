@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Allows the 'Add another item' button text to be customised.
+ * Allows the 'Add another item' button text to be customized.
  */
 
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -27,7 +27,7 @@ function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateI
     $form['custom_add_another'] = [
       '#type' => 'textfield',
       '#title' => t('Custom add another item button'),
-      '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Add another item'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
+      '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Add another item'. You may customize the text for that button here, an empty value will just use the default value for the button text."),
       '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_add_another', ''),
 
       // Hidden when the 'Number of values' is not unlimited.
@@ -43,7 +43,7 @@ function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateI
     $form['custom_remove'] = [
       '#type' => 'textfield',
       '#title' => t('Custom remove button'),
-      '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Remove'. You may customise the text for that button here, an empty value will just use the default value for the button text."),
+      '#description' => t("If the number of items in this field is set to 'Unlimited' then you might get a button that allows you to 'Remove'. You may customize the text for that button here, an empty value will just use the default value for the button text."),
       // Add a hint for the empty value if hint module is around.
       '#hint' => t('Remove this item'),
       '#default_value' => $field->getThirdPartySetting('custom_add_another', 'custom_remove', ''),

@@ -1,13 +1,13 @@
 Custom add another
 ==================
 
-This is a very simple module that allows you to customise the text
+This is a very simple module that allows you to customize the text
 of the 'Add another item' button on multi-valued fields.
 
-If your field supports 'unlimited' values then you are offered 
-the option of customising the 'Add another item' button text.
+If your field supports 'unlimited' values then you are offered
+the option of customizing the 'Add another item' button text.
 
-This setting is stored per 'bundle',so you can have different button text 
+This setting is stored per 'bundle',so you can have different button text
 if you use the same field in two places.
 
 Requirements
@@ -22,7 +22,7 @@ When editing a field that has 'Unlimited' values,
 an extra textfield will appear in the 'BUNDLE settings' fieldset that
 allows you to specify the custom button text.
 
-E.g. for the 'page' content type, it will be in the 
+E.g. for the 'page' content type, it will be in the
 'Page settings' fieldset when editing field's options.
 
 Examples
