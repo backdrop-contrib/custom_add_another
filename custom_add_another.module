@@ -58,7 +58,9 @@ function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateI
       ],
     ];
 
-    array_unshift($form['actions']['submit']['#submit'], 'custom_add_another_third_party_settings_submit');
+ if (isset($form['actions']['submit'])) {
+      array_unshift($form['actions']['submit']['#submit'], 'custom_add_another_third_party_settings_submit');
+    }
   }
 }
 
