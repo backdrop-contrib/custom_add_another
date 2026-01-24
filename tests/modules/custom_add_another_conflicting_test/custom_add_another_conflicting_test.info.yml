@@ -2,7 +2,7 @@ name: 'Conflicting Third Party Module'
 type: module
 description: 'Test module that provides third_party_settings to demonstrate the issue within 3411964.'
 package: Testing
-core_version_requirement: ^10
+core_version_requirement: ^10.2 || ^11
 dependencies:
   - custom_add_another:custom_add_another
 hidden: true
