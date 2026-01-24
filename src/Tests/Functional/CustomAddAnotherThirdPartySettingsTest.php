@@ -52,7 +52,8 @@ class CustomAddAnotherThirdPartySettingsTest extends BrowserTestBase {
         'entity_type' => 'node',
         'type' => 'string',
         'cardinality' => -1,
-    ])->save();
+      ])
+      ->save();
     $this->container->get('entity_type.manager')
       ->getStorage('field_config')
       ->create([
@@ -60,7 +61,8 @@ class CustomAddAnotherThirdPartySettingsTest extends BrowserTestBase {
         'label' => 'Test Field',
         'entity_type' => 'node',
         'bundle' => 'article',
-    ])->save();
+      ])
+      ->save();
 
     // Create admin user with necessary permissions.
     $this->adminUser = $this->drupalCreateUser([
@@ -92,7 +94,6 @@ class CustomAddAnotherThirdPartySettingsTest extends BrowserTestBase {
 
     // Verify the settings were saved by checking the success message.
     $this->assertSession()->statusMessageContains('Saved Test Field configuration.', 'status');
-
 
     // Load the config and verify the third_party_settings were set correctly.
     $field_config = $this->container->get('entity_type.manager')
