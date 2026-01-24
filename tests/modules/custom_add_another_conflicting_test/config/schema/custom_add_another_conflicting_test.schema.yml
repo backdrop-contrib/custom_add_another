@@ -1,0 +1,7 @@
+field.field.*.*.*.third_party.custom_add_another_conflicting_test:
+  type: mapping
+  label: 'Custom Add Another Conflicting Test settings'
+  mapping:
+    test:
+      type: string
+      label: 'Test text'
