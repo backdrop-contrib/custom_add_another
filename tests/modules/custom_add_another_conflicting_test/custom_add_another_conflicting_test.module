@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Test module to exhibit third_party_settings override behavior.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function custom_add_another_conflicting_test_form_field_config_edit_form_alter(array &$form, FormStateInterface $form_state): void {
+  /** @var \Drupal\field\FieldConfigInterface $field_config */
+  $field_config = $form_state->getFormObject()->getEntity();
+  $form['third_party_settings']['custom_add_another_conflicting_test'] = [
+    '#type' => 'details',
+    '#title' => t('Test settings'),
+    '#open' => TRUE,
+  ];
+  $form['third_party_settings']['custom_add_another_conflicting_test']['test'] = [
+    '#type' => 'textfield',
+    '#title' => t('Test text'),
+    '#default_value' => $field_config->getThirdPartySetting('custom_add_another_conflicting_test', 'test', ''),
+  ];
+}

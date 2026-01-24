@@ -58,17 +58,14 @@ function custom_add_another_form_field_config_edit_form_alter(&$form, FormStateI
       ],
     ];
 
-    array_unshift($form['actions']['submit']['#submit'], 'custom_add_another_third_party_settings_submit');
+    $form['#entity_builders'][] = 'custom_add_another_field_config_edit_form_builder';
   }
 }
 
 /**
- * Submit callback that saves custom labels to field Third Party Settings.
+ * Entity builder that saves custom labels to field Third Party Settings.
  */
-function custom_add_another_third_party_settings_submit($form, FormStateInterface $form_state) {
-  /** @var \Drupal\field\FieldConfigInterface $field */
-  $field = $form_state->getFormObject()->getEntity();
-
+function custom_add_another_field_config_edit_form_builder($entity_type, FieldConfigInterface $field, array &$form, FormStateInterface $form_state) {
   if (!empty($form_state->getValue('custom_add_another'))) {
     $field
       ->setThirdPartySetting('custom_add_another', 'custom_add_another', $form_state->getValue('custom_add_another'));
