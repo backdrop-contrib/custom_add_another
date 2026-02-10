@@ -1,6 +1,7 @@
 # Custom add another
 
-This is a very simple module that allows you to customise the text of the 'Add another item' button on multi-valued fields.
+This is a very simple module that allows you to customise the text of the 'Add another item'
+and "Remove item" buttons on multi-valued fields.
 
 If your field supports 'unlimited' values then you are offered the option of customising the 'Add another item' button text.
 This setting is stored per 'bundle', so you can have different button text if you use the same field in two places.
@@ -37,9 +38,9 @@ which allows you to specify the custom button text.
 
 ## Credits
 
-This module is based on the Drupal module custom\_add\_another-7.x-1.1
+This module is based on the Drupal module custom_add_another-7.x-1.1
 
-Project page: https://www.drupal.org/project/custom\_add\_another
+Project page: https://www.drupal.org/project/custom_add_another
 
 Drupal Maintainers:
 
@@ -48,7 +49,7 @@ Drupal Maintainers:
 From the Drupal README.txt file:
 This project was originally created for Drupal by developers at ComputerMinds - visit at http://www.computerminds.co.uk.
 
-> "We at ComputerMinds pride ourselves on offering quality \[Drupal training](http://www.computerminds.co.uk/drupal-training), 
-> \[Drupal development](http://www.computerminds.co.uk/drupal-development) and \[Drupal consulting](http://www.computerminds.co.uk/drupal-consulting). 
+> "We at ComputerMinds pride ourselves on offering quality [Drupal training](http://www.computerminds.co.uk/drupal-training), 
+> [Drupal development](http://www.computerminds.co.uk/drupal-development) and [Drupal consulting](http://www.computerminds.co.uk/drupal-consulting). 
 > Go Drupal!"
 
