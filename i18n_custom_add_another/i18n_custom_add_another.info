@@ -2,6 +2,7 @@ name = Custom add another translation
 description = Provides i18n field integration for Custom add another module
 package = Multilingual - Internationalization
 backdrop = 1.x
+type = module
 
 dependencies[] = custom_add_another
 dependencies[] = i18n_field

@@ -1,4 +1,5 @@
 name = Custom add another
-description = "Allows modification of the 'Add another item' button on fields"
+description = Allows modification of the 'Add another item' and 'Remove' buttons on fields
+type = module
 package = Fields
 backdrop = 1.x
