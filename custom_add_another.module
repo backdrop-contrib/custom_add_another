@@ -37,6 +37,7 @@ function custom_add_another_form_field_ui_field_edit_form_alter(&$form, &$form_s
       '#type' => 'fieldset',
       '#title' => t('<em>Custom add another</em> settings'),
       // Hidden when the 'Number of values' is not unlimited.
+      '#attributes' => array('style' => 'display:none;'),  // hidden by default, unless cardinality below is unlimited
       '#states' => array(
         'visible' => array(
           ':input[name="field[cardinality]"]' => array('value' => (string)FIELD_CARDINALITY_UNLIMITED),
@@ -61,7 +62,7 @@ function custom_add_another_form_field_ui_field_edit_form_alter(&$form, &$form_s
         ),
       ),
     );
-
+    
     $form['instance']['settings']['custom_add_another_wrapper']['custom_remove'] = array(
       '#type' => 'textfield',
       '#title' => t('Custom remove button'),
