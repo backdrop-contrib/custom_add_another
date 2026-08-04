@@ -31,12 +31,14 @@ which allows you to specify the custom button text.
 
 ## Current Maintainers
 
-* [Richard Peacock](https://github.com/swampopus) - Originally ported to Backdrop CMS.
+* [Richard Peacock](https://github.com/swampopus)
 * Seeking additional maintainers.
 
 
 
 ## Credits
+
+- Ported to Backdrop CMS by [Richard Peacock](https://github.com/swampopus)
 
 This module is based on the Drupal module custom_add_another-7.x-1.1
 
